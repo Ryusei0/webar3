@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Model Example with Interactive Input</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <link rel="stylesheet" href="style.css"> <!-- CSSファイルへのリンク -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="videoButtons"></div> <!-- 動画ボタンを追加するコンテナ -->
+    <div id="videoButtons"></div>
 
     <div id="inputContainer">
         <input type="text" id="userInput" placeholder="テキストを入力...">
@@ -22,23 +22,29 @@
             <video id="my-video" src="" crossorigin="anonymous" loop muted autoplay></video>
         </a-assets>
 
-        <!-- モデルの位置とスケールを調整 -->
         <a-entity gltf-model="https://s3.ap-northeast-3.amazonaws.com/testunity1.0/webar/test.gltf" 
                   position="0 0 0"  
                   scale="0.1 0.1 0.1"
                   animation-mixer>
         </a-entity>
         
-        <!-- 動画と平面の位置を調整 -->
         <a-video src="#my-video" width="1.5" height="0.75" position="0 3 -5" rotation="0 0 0"></a-video>
-        <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#fff"></a-plane> <!-- 平面をモデルの後ろに配置 -->
+        <a-plane position="0 0 -5" rotation="-90 0 0" width="4" height="4" color="#fff"></a-plane>
 
-        <a-sky color="#ECECEC"></a-sky> <!-- 背景色を設定 -->
+        <a-sky color="#ECECEC"></a-sky>
         
         <a-camera position="0 1.6 0" look-controls="enabled: true"></a-camera>
     </a-scene>
 
     <button id="toggleResponse" onclick="toggleResponse()">返答を表示</button>
+
+    <script>
+        // JavaScriptのコードは省略しています。
+        // 必要に応じてここに追加してください。
+    </script>
+</body>
+</html>
+
 
     <script>
 
