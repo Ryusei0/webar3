@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3D Model Animation in Three.js</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.js"></script>
+    <script>
+        // シーンを作成
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff);
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        // レンダラーを作成
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        // アニメーションミキサーを初期化
+        let mixer;
+
+        // GLTF形式の3Dモデルを読み込む
+        const loader = new THREE.GLTFLoader();
+        loader.load('https://s3.ap-northeast-3.amazonaws.com/testunity1.0/webar/test.gltf', function(gltf) {
+            scene.add(gltf.scene);
+            // アニメーションがある場合、アニメーションミキサーを設定
+            if (gltf.animations && gltf.animations.length) {
+                mixer = new THREE.AnimationMixer(gltf.scene);
+                gltf.animations.forEach((clip) => {
+                    mixer.clipAction(clip).play();
+                });
+            }
+        }, undefined, function(error) {
+            console.error(error);
+        });
+
+        // レンダリング関数
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // アニメーションミキサーが設定されていれば更新
+            if (mixer) {
+                const delta = clock.getDelta();
+                mixer.update(delta);
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // アニメーションを開始
+        animate();
+    </script>
+</body>
+</html>
