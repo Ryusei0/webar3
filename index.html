@@ -18,14 +18,14 @@
     <div id="responseContainer">応答がここに表示されます。</div>
 
     <a-scene embedded>
-        <a-assets>
+        <a-assets timeout="10000">
             <video id="my-video" src="" crossorigin="anonymous" loop muted autoplay></video>
         </a-assets>
 
         <!-- モデルの位置とスケールを調整 -->
         <a-entity gltf-model="https://s3.ap-northeast-3.amazonaws.com/testunity1.0/webar/test.gltf" 
                   position="0 0 0"  
-                  scale="0.01 0.01 0.01"
+                  scale="0.1 0.1 0.1"
                   animation-mixer>
         </a-entity>
         
@@ -35,7 +35,7 @@
 
         <a-sky color="#ECECEC"></a-sky> <!-- 背景色を設定 -->
         
-        <a-camera position="0 0 0" look-controls="true"></a-camera> <!-- カメラの位置を調整 -->
+        <a-camera position="0 1.6 0" look-controls="enabled: true"></a-camera>
     </a-scene>
 
     <button id="toggleResponse" onclick="toggleResponse()">返答を表示</button>
